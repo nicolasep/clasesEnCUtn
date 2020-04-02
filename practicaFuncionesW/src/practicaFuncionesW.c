@@ -10,8 +10,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "nico.h"
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+
+
+	char palabra[21];
+	printf("Ingrese algo: ");
+	scanf("%s",&palabra);
+
+
+	if(esPalabra(palabra))
+	{
+
+	}
+
+
+
 	return EXIT_SUCCESS;
 }
