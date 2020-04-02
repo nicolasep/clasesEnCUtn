@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio_ext.h>
+//#include <stdio_ext.h> para linux
 
 int getInt(char mensaje[])
 {
@@ -23,7 +23,8 @@ char getCadena(char mensaje[], int tam)
 
 	char palabra[tam];
 	printf("%s",mensaje);
-	__fpurge(stdin);
+	fflush(stdin);
+	//__fpurge(stdin); //para linux
 	fgets(palabra,tam,stdin);
 
 
@@ -34,7 +35,8 @@ char getChar(char mensaje[])
 
 	char aux;
 	printf("%s",mensaje);
-	__fpurge(stdin);
+	fflush(stdin);
+	//__fpurge(stdin); //para linux
 	scanf("%c",&aux);
 
 	return aux;
