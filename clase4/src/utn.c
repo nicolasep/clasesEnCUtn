@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+/*
 int dividir(float* pResultado, int numero1, int numero2)
 {
 	int flag = -1;
@@ -20,4 +22,43 @@ int dividir(float* pResultado, int numero1, int numero2)
 	}
 	return flag;
 
+}*/
+
+
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
+{
+	int flag = -1;
+	int bufferInt;
+	int contadorIntentos = 0;
+
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL)
+	{
+		do
+		{
+			if(contadorIntentos == reintentos)
+			{
+				flag = -2;
+				break;
+			}
+
+			printf("%s\n",mensaje);
+			scanf("%d",&bufferInt);
+			if(bufferInt >= minimo && bufferInt <= maximo)
+			{
+				flag = 0;
+				*pResultado = bufferInt;
+				break;
+			}
+			else
+			{
+				printf("%s\n",mensajeError);
+			}
+
+			contadorIntentos++;
+
+		}while(1);
+
+	}
+
+	return flag;
 }

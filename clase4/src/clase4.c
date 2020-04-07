@@ -19,7 +19,8 @@ int main(void) {
 
 	setbuf(stdout,NULL);
 
-	float resultado;
+
+	/*float resultado;
 	int numero1;
 	int numero2;
 	int respuesta;
@@ -38,7 +39,54 @@ int main(void) {
 	else
 	{
 		printf("no es posible dividir por cero\n");
+	}*/ //PRIMERA PARTE
+
+	int edad;
+	int peso;
+	int respuesta;
+
+	 respuesta = utn_getNumero(&edad,"Ingrese la edad\n","Error, la edad debe ser desde 0 a 199\n",1,199,2);
+	if(respuesta == 0)
+	{
+		printf("La edad es: %d",edad);
 	}
+	else
+	{
+		if(respuesta == -1)
+		{
+			printf("error\n");
+		}
+		else
+		{
+			printf("Se supero la cantidad de intentos\n\n");
+		}
+
+	}
+
+	system("pause");
+	system("cls");
+
+	respuesta = utn_getNumero(&peso,"Ingrese la peso\n","Error, la peso debe ser desde 0 a 500\n",0,500,2);
+	if(respuesta == 0)
+	{
+		printf("El peso es: %d\n",peso);
+	}
+	else
+	{
+		if(respuesta == -1)
+		{
+			printf("error\n");
+		}
+		else
+		{
+			printf("Se supero la cantidad de intentos\n\n");
+		}
+
+	}
+
+	system("pause");
+
+
 
 
 
