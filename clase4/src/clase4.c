@@ -48,7 +48,7 @@ int main(void) {
 	 respuesta = utn_getNumero(&edad,"Ingrese la edad\n","Error, la edad debe ser desde 0 a 199\n",1,199,2);
 	if(respuesta == 0)
 	{
-		printf("La edad es: %d",edad);
+		printf("La edad es: %d\n",edad);
 	}
 	else
 	{
