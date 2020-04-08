@@ -44,6 +44,8 @@ int main(void) {
 	int edad;
 	int peso;
 	int respuesta;
+	char letra;
+	float flotante;
 
 	 respuesta = utn_getNumero(&edad,"Ingrese la edad\n","Error, la edad debe ser desde 0 a 199\n",1,199,2);
 	if(respuesta == 0)
@@ -83,6 +85,46 @@ int main(void) {
 		}
 
 	}
+
+	system("pause");
+
+	 respuesta = utn_getChar(&letra,"Ingrese la edad\n","Error, la edad debe ser desde A a J\n",'A','J',1);
+	if(respuesta == 0)
+	{
+		printf("La edad es: %c\n",letra);
+	}
+	else
+	{
+		if(respuesta == -1)
+		{
+			printf("error\n");
+		}
+		else
+		{
+			printf("Se supero la cantidad de intentos\n\n");
+		}
+
+	}
+	system("pause");
+
+	 respuesta = utn_getNumeroFlotante(&flotante,"Ingrese la edad\n","Error, la edad debe ser desde A a J\n",1.0,50.0,1);
+	if(respuesta == 0)
+	{
+		printf("La edad es: %.2f\n",flotante);
+	}
+	else
+	{
+		if(respuesta == -1)
+		{
+			printf("error\n");
+		}
+		else
+		{
+			printf("Se supero la cantidad de intentos\n\n");
+		}
+
+	}
+
 
 	system("pause");
 
