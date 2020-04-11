@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include "nico.h"
 
 int main(void) {
@@ -17,7 +19,7 @@ int main(void) {
 
 	char palabra[21];
 	printf("Ingrese algo: ");
-	scanf("%s",&palabra);
+
 
 
 	if(esPalabra(palabra))
