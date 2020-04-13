@@ -82,6 +82,31 @@ int esTelefono(char telefono[])
 
 }
 
+int esEmail(char cadena[])
+{
+	int retorno = -1;
+	int contadorArroba = 0;
+	int contadorPuntos = 0;
+
+	int tam = strlen(cadena);
+	int i;
+	for(i=0; i<tam; i++)
+	{
+		if(cadena[i] == '@')
+		{
+			contadorArroba ++;
+		}
+		else
+		{
+			if(cadena[i] == '.')
+			{
+				contadorPuntos ++;
+			}
+		}
+	}
+
+	return retorno;
+}
 int esAlphaNumerico(char numero[])
 {
 	int tam = strlen(numero);
@@ -116,21 +141,59 @@ int esAlphaNumerico(char numero[])
 		return 0;
 	}
 }
-
+//funciona
 int esPalabra(char palabra[])
 {
 	int tam = strlen(palabra);
+	int retorno = 0;
 
 	int i;
 	for(i=0; i<tam; i++)
 	{
-		if((palabra[i] !=' ') && (palabra[i] < 'a' || palabra[i] > 'z') && (palabra[i] < 'A' || palabra[i] > 'Z'))
+		if((palabra[i] !=' ') && (palabra[i]<'a' || palabra[i]>'z') && (palabra[i]<'A' || palabra[i]>'Z'))
 		{
-			return 0;
+			retorno = -1;
 		}
 	}
-	return 1;
+	return retorno;
 }
+//funciona
+int utn_getCadena(char* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
+{
+	char bufferChar[100];
+	int tam;
+	int retorno = -1;
+
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
+	{
+		do
+		{
+			printf("%s\n",mensaje);
+			gets(bufferChar);
+			if((esPalabra(bufferChar))==0)
+			{
+				tam = strlen(bufferChar);
+				if(tam >= minimo && tam <= maximo)
+				{
+					strcpy(pResultado,bufferChar);
+					retorno = 0;
+					break;
+				}
+			}
+			else
+			{
+				printf("%s",mensajeError);
+				reintentos--;
+			}
+
+
+
+		}while(reintentos >= 0);
+
+	}
+	return retorno;
+}
+/*
 int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
 
@@ -157,6 +220,11 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo
 					reintentos--;
 				}
 			}
+			else
+			{
+				printf("%s",mensajeError);
+				reintentos--;
+			}
 
 
 
@@ -166,7 +234,67 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo
 	}
 
 	return retorno;
+}*/
+//funciona
+int esNumero(char cadena[])
+{
+	int retorno = 0;
+	int tam = strlen(cadena);
+	int i;
+
+
+	for(i=0; i<tam; i++)
+	{
+		if(cadena[i]>'9' || cadena[i]<'0')
+		{
+			retorno = -1;
+			break;
+		}
+
+	}
+
+
+	return retorno;
 }
+//funciona
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
+{
+
+	int retorno = -1;
+	int bufferInt;
+	char bufferChar[64];
+
+
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
+	{
+		do
+		{
+			printf("%s\n",mensaje);
+			fflush(stdin);
+			gets(bufferChar);
+
+			if((esNumero(bufferChar))==0)
+			{
+				bufferInt = atoi(bufferChar);
+				if(bufferInt >= minimo && bufferInt <= maximo)
+				{
+
+					*pResultado = bufferInt;
+					retorno = 0;
+					break;
+				}
+
+			}
+			else
+			{
+				printf("%s\n",mensajeError);
+				reintentos--;
+			}
+		}while(reintentos >= 0);
+	}
+	return retorno;
+}
+//no se uso
 int getNumero(int* pResultado, char* mensaje, char* mensajeError)
 {
 
@@ -192,24 +320,7 @@ int getNumero(int* pResultado, char* mensaje, char* mensajeError)
 
 	return retorno;
 }
-int esNumero(char* cadena)
-{
-	int retorno = 0;
-	int tam = strlen(cadena);
-	int i;
-
-	for(i=0; i<tam; i++)
-	{
-		if(cadena[i] > '9' || cadena[i] < '0')
-		{
-			retorno = -1;
-			break;
-		}
-
-	}
-
-	return retorno;
-}
+//no se uso
 int esNumerico(char palabra[])
 {
 	int tam = strlen(palabra);
