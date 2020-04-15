@@ -59,8 +59,8 @@ int main(void) {
 }
 int esNumerica(char* cadena)
 {
-	int retorno = 0;
-	int i;
+	int retorno = 1;
+	int i = 0;
 
 	if(cadena[0]=='-')
 	{
@@ -71,7 +71,7 @@ int esNumerica(char* cadena)
 
 		if(cadena[i]>'9' || cadena[i]<'0')
 		{
-			retorno = -1;
+			retorno = 0;
 			break;
 		}
 	}
