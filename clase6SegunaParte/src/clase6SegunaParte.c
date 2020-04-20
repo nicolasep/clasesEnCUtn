@@ -103,17 +103,10 @@ static int myGets(char* cadena, int longitud) // el static es para que la funcio
 	cadena[strlen(cadena)-1] ='\0';
 
 
+
 	return retorno;
 }
-/*
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minino, int maximo, int reintentos)
-{
-	int retorno = -1;
 
-
-
-	return retorno;
-}*/
 int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
 
