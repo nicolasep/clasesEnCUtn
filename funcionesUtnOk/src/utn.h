@@ -14,10 +14,10 @@ int ordenarArrayNumerico(int* pArray, int len);
 
 
 
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
+int myGets(char* cadena, int len);
 int esNumerica(char* cadena);
 int getInt(int* pResultado);
-int myGets(char* cadena, int len);
+int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
 
 int getFloat(float* pResultado);
 int validarNumeroFloat(char* cadena);

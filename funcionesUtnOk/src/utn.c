@@ -31,7 +31,6 @@ void intSwap(int* pNumeroA, int* pNumeroB)
 	buffer = *pNumeroA;
 	*pNumeroA = *pNumeroB;
 	*pNumeroB = buffer;
-
 }
 int ordenarArrayNumerico(int* pArray, int len)
 {
@@ -68,7 +67,7 @@ int ordenarArrayNumerico(int* pArray, int len)
 	return retorno;
 }
 
-int esNumerica(char* cadena)
+static int esNumerica(char* cadena)
 {
 	int retorno = 1;
 	int i = 0;
@@ -88,7 +87,7 @@ int esNumerica(char* cadena)
 	}
 	return retorno;
 }
-int myGets(char* cadena, int len) // el static es para que la funcion no se pueda usar desde otro archivo o desde el main si esta en otra libreria. son funciones de uso interno
+static int myGets(char* cadena, int len) // el static es para que la funcion no se pueda usar desde otro archivo o desde el main si esta en otra libreria. son funciones de uso interno
 {
 	int retorno = 0;
 
@@ -99,7 +98,7 @@ int myGets(char* cadena, int len) // el static es para que la funcion no se pued
 
 	return retorno;
 }
-int getInt(int* pResultado)
+static int getInt(int* pResultado)
 {
 	int retorno = -1;
 	char buffer[4096];
@@ -113,11 +112,7 @@ int getInt(int* pResultado)
 
 	return retorno;
 }
-
-
-int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
-
-
+int utn_getNumero(char* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
 
 	int retorno = -1;
@@ -150,8 +145,7 @@ int utn_getNumero(int* pResultado, char* mensaje, char* mensajeError, int minimo
 	return retorno;
 }
 
-
-int validarNumeroFloat(char* cadena)
+static int validarNumeroFloat(char* cadena)
 {
     int retorno=1;
 	int i;
@@ -194,7 +188,7 @@ int validarNumeroFloat(char* cadena)
     }
     return retorno;
 }
-int getFloat(float* pResultado)
+static int getFloat(float* pResultado)
 {
 	int retorno = -1;
 	char buffer[4096];
@@ -238,7 +232,7 @@ int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, 
 		return retorno;
 }
 //cadenas
-int validarCadena(char* cadena)
+static int validarCadena(char* cadena)
 {
     int retorno= 1;
 	int i;
@@ -253,8 +247,7 @@ int validarCadena(char* cadena)
     }
     return retorno;
 }
-
-int getCadena(char* pResultado)
+static int getCadena(char* pResultado)
 {
 	int retorno = -1;
 	char buffer[4096];
@@ -302,7 +295,7 @@ int utn_getCadena(char* pResultado, char* mensaje, char* mensajeError, int minim
 		return retorno;
 }
 //telefono
-int esTelefono(char* telefono)
+static int esTelefono(char* telefono)
 {
 	int retorno = 1;
 	int contadorGuiones = 0;
@@ -337,7 +330,7 @@ int esTelefono(char* telefono)
 	return retorno;
 
 }
-int getTelefono(char* pResultado)
+static int getTelefono(char* pResultado)
 {
 	int retorno = -1;
 	char buffer[4096];
@@ -382,7 +375,7 @@ int utn_getTelefono(char* pResultado, char* mensaje, char* mensajeError, int min
 }
 //funciones email
 
-int esEmail(char* cadena)
+static int esEmail(char* cadena)
 {
 	int retorno = 1;
 	int i;
@@ -433,7 +426,7 @@ int esEmail(char* cadena)
 
 	return retorno;
 }
-int getEmail(char* pResultado)
+static int getEmail(char* pResultado)
 {
 	int retorno = -1;
 	char buffer[4096];
