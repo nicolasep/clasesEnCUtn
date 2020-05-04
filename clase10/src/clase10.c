@@ -1,6 +1,6 @@
 /*
  ============================================================================
- Name        : clase9.c
+ Name        : clase10.c
  Author      : nicolas
  Version     :
  Copyright   : Your copyright notice
