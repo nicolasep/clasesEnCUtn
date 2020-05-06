@@ -7,7 +7,7 @@
 #define TIPO_LCD	0
 #define TIPO_LED	1
 
-#include "Contratacion.h"
+
 typedef struct
 {
 	char nombre[NOMBRE_LEN];
@@ -28,8 +28,6 @@ int pan_modificarArray(Pantalla* array,int limite, int indice);
 int pan_bajaArray(Pantalla* array,int limite, int indice);
 int pan_ordenarPorNombre(Pantalla* array,int limite);
 
-int pan_buscarIdActivo(Pantalla* array, int limite, int valorBuscado);
+int pan_altaForzadaArray(Pantalla* array,int limite, int indice, int* id,char* nombre,char* direccion, float precio ,int tipo);
 
-
-int pan_altaArrayForzada(Pantalla* array,int limite, int indice, int* id, char* nombre, char* direccion, float precio, int tipo);
 #endif /* PANTALLA_H_ */

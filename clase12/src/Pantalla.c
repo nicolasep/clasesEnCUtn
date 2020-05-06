@@ -5,7 +5,7 @@
 #include "Pantalla.h"
 #include "utn.h"
 
-static const char TXT_TIPOS[2][4]={"LCD","LED"};
+const char TXT_TIPOS[2][4]={"LCD","LED"};
 
 /**
  * \brief Imprime los datos de un cliente
@@ -16,11 +16,21 @@ static const char TXT_TIPOS[2][4]={"LCD","LED"};
 int pan_imprimir(Pantalla* pElemento)
 {
 	int retorno=-1;
-
+	char cadenaTipo[32];
 	if(pElemento != NULL && pElemento->isEmpty == 0)
 	{
 		retorno=0;
-
+		//cargarTxtTipo(pElemento,cadenaTipo);
+		switch(pElemento->tipo)
+		{
+			case TIPO_LCD:
+				strncpy(cadenaTipo,"LCD",32);
+				break;
+			case TIPO_LED:
+				strncpy(cadenaTipo,"LED",32);
+				break;
+		}
+		printf("\nID: %d - %s - %s - %.2f - %s",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio,cadenaTipo);
 		printf("\nID: %d - %s - %s - %.2f - %s",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio,TXT_TIPOS[pElemento->tipo]);
 	}
 	return retorno;
@@ -112,19 +122,18 @@ int pan_altaArray(Pantalla* array,int limite, int indice, int* id)
 int pan_modificarArray(Pantalla* array,int limite, int indice)
 {
 	int respuesta = -1;
-	Pantalla bufferPantalla;
+	Pantalla bufferCliente;
 
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && array[indice].isEmpty == 0)
 	{
-		if(	utn_getNombre(bufferPantalla.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
-			utn_getDescripcion(bufferPantalla.direccion,DIRECCION_LEN,"\nDireccion?\n","\nERROR\n",2) == 0 &&
-			utn_getNumeroFlotante(&bufferPantalla.precio,"\nPrecio?\n","\nERROR\n",0,10000,2) == 0 &&
-			utn_getNumero(&bufferPantalla.tipo,"Ingrese tipo [0:LCD 1:LED]:","No!",0,1,2)==0)
+		if(	utn_getNombre(bufferCliente.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
+			utn_getDni(bufferCliente.direccion,DIRECCION_LEN,"\nDNI?\n","\nERROR\n",2) == 0 &&
+			utn_getNumeroFlotante(&bufferCliente.precio,"\nAltura?\n","\nERROR\n",0,5,2) == 0)
 		{
 			respuesta = 0;
-			bufferPantalla.id = array[indice].id;
-			bufferPantalla.isEmpty = 0;
-			array[indice] = bufferPantalla;
+			bufferCliente.id = array[indice].id;
+			bufferCliente.isEmpty = 0;
+			array[indice] = bufferCliente;
 		}
 	}
 	return respuesta;
@@ -339,36 +348,6 @@ int pan_buscarIdActivo(Pantalla* array, int limite, int valorBuscado)
 
 
 
-/**
- * \brief Da de alta una pantalla en una posicion del array
- * \param array Array de pantallas a ser actualizado
- * \param limite Limite del array de pantallas
- * \param indice Posicion a ser actualizada
- * \param id Identificador a ser asignado a la pantalla
- * \return Retorna 0 (EXITO) y -1 (ERROR)
- *
- */
-int pan_altaArrayForzada(Pantalla* array,int limite, int indice, int* id, char* nombre, char* direccion, float precio, int tipo)
-{
-	int respuesta = -1;
-	Pantalla bufferPantalla;
-
-	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && id != NULL)
-	{
-
-			strncpy(bufferPantalla.nombre,nombre,NOMBRE_LEN);
-			strncpy(bufferPantalla.direccion,direccion,DIRECCION_LEN);
-			bufferPantalla.precio= precio;
-			bufferPantalla.tipo=tipo;
-			respuesta = 0;
-			bufferPantalla.id = *id;
-			bufferPantalla.isEmpty = 0;
-			array[indice] = bufferPantalla;
-			(*id)++;
-
-	}
-	return respuesta;
-}
 
 
 

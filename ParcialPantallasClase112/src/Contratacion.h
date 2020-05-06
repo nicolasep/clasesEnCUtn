@@ -27,6 +27,6 @@ int con_modificarArray(Contratacion* array,int limite, int indice);
 int con_bajaArray(Contratacion* array,int limite, int indice);
 int con_ordenarPorNombre(Contratacion* array,int limite);
 
-//int con_altaArray(Contratacion* array,int limite, int indice, int* id,Pantalla* arrayP, int limiteP);
+int con_altaArray(Contratacion* array,int limite, int indice, int* id,Pantalla* arrayP, int limiteP);
 //int con_altaArray(Contratacion* array,int limite, int indice, int* id, Pantalla* arrayP, int limiteP)
 #endif /* CONTRATACION_H_ */

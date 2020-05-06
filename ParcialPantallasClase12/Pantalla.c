@@ -16,11 +16,9 @@ static const char TXT_TIPOS[2][4]={"LCD","LED"};
 int pan_imprimir(Pantalla* pElemento)
 {
 	int retorno=-1;
-
 	if(pElemento != NULL && pElemento->isEmpty == 0)
 	{
 		retorno=0;
-
 		printf("\nID: %d - %s - %s - %.2f - %s",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio,TXT_TIPOS[pElemento->tipo]);
 	}
 	return retorno;
@@ -163,7 +161,6 @@ int pan_buscarId(Pantalla array[], int limite, int valorBuscado)
 	int i;
 	if(array != NULL && limite > 0 && valorBuscado >= 0)
 	{
-		respuesta = 0;
 		for(i=0;i<limite;i++)
 		{
 			if(array[i].id == valorBuscado)
@@ -189,7 +186,6 @@ int pan_getEmptyIndex(Pantalla* array,int limite)
 	int i;
 	if(array != NULL && limite > 0)
 	{
-		respuesta = 0;
 		for(i=0;i<limite;i++)
 		{
 			if(array[i].isEmpty == 1)
@@ -307,38 +303,6 @@ int pan_ordenarPorNombrePrecio(Pantalla* array,int limite)
 
 
 
-
-
-
-/** \brief Busca un ID activo en un array y devuelve si es correcto
-* \param array contratacion Array de contratacion
-* \param limite int Tamaño del array
-* \param posicion int* Puntero a la posicion del array donde se encuentra el valor buscado
-* \return int Return (-1) si no encuentra el valor buscado o Error [Invalid length or NULL pointer] - (0) si encuentra el valor buscado
-*
-*/
-int pan_buscarIdActivo(Pantalla* array, int limite, int valorBuscado)
-{
-	int respuesta = -1;
-	int i;
-	if(array != NULL && limite > 0 && valorBuscado >= 0)
-	{
-		respuesta = 0;
-		for(i=0;i<limite;i++)
-		{
-			if(array[i].id == valorBuscado && array[i].isEmpty == 0)
-			{
-				respuesta = 0;
-				break;
-			}
-		}
-	}
-	return respuesta;
-}
-
-
-
-
 /**
  * \brief Da de alta una pantalla en una posicion del array
  * \param array Array de pantallas a ser actualizado
@@ -348,27 +312,32 @@ int pan_buscarIdActivo(Pantalla* array, int limite, int valorBuscado)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_altaArrayForzada(Pantalla* array,int limite, int indice, int* id, char* nombre, char* direccion, float precio, int tipo)
+int pan_altaForzadaArray(Pantalla* array,int limite, int indice, int* id,char* nombre,char* direccion, float precio ,int tipo)
+
 {
 	int respuesta = -1;
 	Pantalla bufferPantalla;
 
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && id != NULL)
 	{
-
 			strncpy(bufferPantalla.nombre,nombre,NOMBRE_LEN);
 			strncpy(bufferPantalla.direccion,direccion,DIRECCION_LEN);
-			bufferPantalla.precio= precio;
-			bufferPantalla.tipo=tipo;
+			bufferPantalla.precio = precio;
+			bufferPantalla.tipo = tipo;
 			respuesta = 0;
 			bufferPantalla.id = *id;
 			bufferPantalla.isEmpty = 0;
 			array[indice] = bufferPantalla;
 			(*id)++;
-
 	}
 	return respuesta;
 }
+
+
+
+
+
+
 
 
 

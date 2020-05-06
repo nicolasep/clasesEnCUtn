@@ -23,9 +23,6 @@
 
 int main(void) {
 
-int numero;
-	setbuf(stdout,NULL);
-
 	Contratacion arraysContrataciones[CANTIDAD_CONTRATACIONES];
 	Pantalla arrayPantallas[CANTIDAD_PANTALLAS];
 	int idPantallas=0;
@@ -38,14 +35,11 @@ int numero;
 	{
 		printf("Array inicializado correctamente. \n\n");
 	}
-
+	/*
 	if(con_inicializarArray(arraysContrataciones,CANTIDAD_CONTRATACIONES) == 0)
 	{
 		printf("Array inicializado correctamente. \n\n");
-	}
-
-
-	pan_altaArrayForzada(arrayPantallas,CANTIDAD_PANTALLAS,0,&idPantallas,"Pantalla 1","Zapiola 879",32432,1);
+	}*/
 
 	do
 	{
