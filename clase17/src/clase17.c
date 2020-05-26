@@ -13,6 +13,8 @@
 
 int main(void) {
 
+	setbuf(stdout,NULL);
+
 	//MEMORIA DINAMICA
 
 	Cliente* punterosCLientes[CANTIDAD_CLIENTES];
@@ -24,8 +26,8 @@ int main(void) {
 
 	Publicacion arrayPublicaciones[CANTIDAD_PUBLICACIONES];
 	Cliente arrayClientes[CANTIDAD_CLIENTES];
-	int idClientes=0;
-	int idPublicaciones=0;
+	int idClientes=1;
+	int idPublicaciones=1;
 	int opcion;
 	int auxiliarIndice;
 	int auxiliarId;
@@ -45,6 +47,11 @@ int main(void) {
 		printf("Array Publicaciones inicializado correctamente. \n\n");
 	}
 
+	cli_altaForzadaArrayConPunteros(punterosCLientes,CANTIDAD_CLIENTES,0,&idClientes,"Alberto","Fernandez","23456789091");
+	cli_altaForzadaArrayConPunteros(punterosCLientes,CANTIDAD_CLIENTES,1,&idClientes,"Roberto","Ferrero", "20148743917");
+	cli_altaForzadaArrayConPunteros(punterosCLientes,CANTIDAD_CLIENTES,2,&idClientes,"Silvia","Dutra", "23177072157");
+
+	/*
 	cli_altaForzadaArray(arrayClientes,CANTIDAD_CLIENTES,0,&idClientes,"Alberto","Fernandez","23456789091");
 	cli_altaForzadaArray(arrayClientes,CANTIDAD_CLIENTES,1,&idClientes,"Roberto","Ferrero", "20148743917");
 	cli_altaForzadaArray(arrayClientes,CANTIDAD_CLIENTES,2,&idClientes,"Silvia","Dutra", "23177072157");
@@ -55,7 +62,7 @@ int main(void) {
 	pub_altaForzadaArray(arrayPublicaciones,CANTIDAD_PUBLICACIONES,3,&idPublicaciones,0,"JE",4,1);
 	pub_altaForzadaArray(arrayPublicaciones,CANTIDAD_PUBLICACIONES,4,&idPublicaciones,0,"JI",2,1);
 	pub_altaForzadaArray(arrayPublicaciones,CANTIDAD_PUBLICACIONES,5,&idPublicaciones,2,"JO",10,1);
-
+*/
 	do
 	{
 		if(!utn_getNumero(	&opcion,
@@ -199,7 +206,8 @@ int main(void) {
 				}
 				break;
 			case 7:
-				info_imprimirClientesConContadorAnuncios(arrayClientes, CANTIDAD_CLIENTES, arrayPublicaciones, CANTIDAD_PUBLICACIONES);
+				//info_imprimirClientesConContadorAnuncios(arrayClientes, CANTIDAD_CLIENTES, arrayPublicaciones, CANTIDAD_PUBLICACIONES);
+				cli_imprimirClientesConPunteros(punterosCLientes,CANTIDAD_CLIENTES);
 				break;
 			case 8:
 				info_imprimirPublicacionesConCuit(arrayClientes, CANTIDAD_CLIENTES, arrayPublicaciones, CANTIDAD_PUBLICACIONES);

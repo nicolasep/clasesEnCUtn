@@ -79,8 +79,8 @@ int cli_altaArrayConPunteros(Cliente** array,int limite, int indice, int* idClie
 			utn_getCuit(pC->cuit, CUIT_LEN, "\nIngrese cuit sin guiones\n", "\nValor incorrecto\n", 2)==0)
 		{
 			respuesta = 0;
-
-			**(array+indice) = *pC;
+			pC->idCliente = *idCliente;
+			*(array+indice) = pC;
 
 			(*idCliente)++;
 			respuesta = 0;
@@ -88,12 +88,58 @@ int cli_altaArrayConPunteros(Cliente** array,int limite, int indice, int* idClie
 	}
 	return respuesta;
 }
+int cli_imprimirClienteConPunteros(Cliente* pElemento)
+{
+	int retorno=-1;
+	if(pElemento != NULL/* && pElemento->isEmpty == 0*/)
+	{
+		retorno=0;
+		printf("\nID: %d - %s - %s - %s",pElemento->idCliente
+										,pElemento->nombre
+										,pElemento->apellido
+										, pElemento->cuit);
+	}
+	return retorno;
+}
+int cli_imprimirClientesConPunteros(Cliente** array,int limite)
+{
+	int respuesta = -1;
+	int i;
+	if(array != NULL && limite > 0)
+	{
+		respuesta = 0;
+		for(i=0;i<limite;i++)
+		{
+			cli_imprimirClienteConPunteros(*(&array[i]));
+		}
+	}
+	return respuesta;
+}
+int cli_altaForzadaArrayConPunteros(Cliente** array,int limite, int indice, int* idCliente,char* nombre,char* apellido, char* cuit)
 
+{
+	int respuesta = -1;
+	Cliente* bufferCliente = cli_new();
 
+	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && idCliente != NULL && bufferCliente != NULL)
+	{
+			strncpy(bufferCliente->nombre,nombre,NOMBRE_LEN);
+			strncpy(bufferCliente->apellido,apellido,APELLIDO_LEN);
+			strncpy(bufferCliente->cuit,cuit,CUIT_LEN);
+			respuesta = 0;
+			bufferCliente->idCliente = *idCliente;
+			bufferCliente->isEmpty = 0;
+			*(array+indice) = bufferCliente;
+			(*idCliente)++;
+	}
+	return respuesta;
+}
 
 
 
 //////////////////////////
+//MEMORIA ESTATICA
+
 
 /**
  * \brief Imprime los datos de un cliente

@@ -400,8 +400,8 @@ static int getCuit(char* pResultado, int longitud)
     if(pResultado != NULL)
     {
     	if(	getString(buffer,sizeof(buffer))==0 &&
-    		esNumerica(buffer,sizeof(buffer)) &&
-			strnlen(buffer,sizeof(buffer))== 11 )
+    		esNumerica(buffer,sizeof(buffer))/* &&
+			strnlen(buffer,sizeof(buffer))== 9 */)
     	{
     		strncpy(pResultado,buffer,longitud);
 			retorno = 0;
@@ -430,7 +430,7 @@ int utn_getCuit(char* pResultado, int longitud,char* mensaje, char* mensajeError
 	{
 		reintentos--;
 		printf("%s",mensaje);
-		if(getCuit(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) == 11 )
+		if(getCuit(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) >=1 )
 		{
 			strncpy(pResultado,bufferString,longitud);
 			retorno = 0;

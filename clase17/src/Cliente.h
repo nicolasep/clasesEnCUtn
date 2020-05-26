@@ -21,7 +21,9 @@ Cliente* cli_new(void);
 int cli_inicializarArrayPunteros(Cliente** array,int len);
 int cli_getEmptyIndexConArrayPunteros(Cliente** array,int limite);
 int cli_altaArrayConPunteros(Cliente** array,int limite, int indice, int* idCliente);
-
+int cli_imprimirClienteConPunteros(Cliente* pElemento);
+int cli_imprimirClientesConPunteros(Cliente** array,int limite);
+int cli_altaForzadaArrayConPunteros(Cliente** array,int limite, int indice, int* idCliente,char* nombre,char* apellido, char* cuit);
 
 
 /////
