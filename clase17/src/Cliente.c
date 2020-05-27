@@ -135,6 +135,27 @@ int cli_altaForzadaArrayConPunteros(Cliente** array,int limite, int indice, int*
 	return respuesta;
 }
 
+int cli_modificarArrayConPunteros(Cliente** array,int limite, int indice)
+{
+	int respuesta = -1;
+	Cliente* AuxBuffer = cli_new();
+
+	if(array != NULL && limite > 0 && indice < limite && indice >= 0)
+	{
+		if(	utn_getNombre(AuxBuffer->nombre,NOMBRE_LEN,"\nNombre cliente?\n","\nValor incorrecto\n\n",2) == 0 &&
+			utn_getNombre(AuxBuffer->apellido,APELLIDO_LEN,"\nApellido cliente?\n","\nValor incorrecto\n\n",2) == 0 &&
+			utn_getCuit(AuxBuffer->cuit, CUIT_LEN, "\nIngrese cuit sin guiones\n", "\nValor incorrecto\n", 2)==0)
+		{
+			respuesta = 0;
+			AuxBuffer->idCliente = array[indice]->idCliente;
+
+			array[indice] = AuxBuffer;
+		}
+	}
+	return respuesta;
+}
+
+
 
 
 //////////////////////////

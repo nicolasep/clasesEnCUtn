@@ -60,12 +60,12 @@ int main(void) {
 		cli_altaForzadaArray(listaClientes,CLI_LEN,&idInicialCliente,"ALEJANDRO","AVILA","23-355422-4");
 		cli_altaForzadaArray(listaClientes,CLI_LEN,&idInicialCliente,"CRISTIAN","PEREZ","24-355422-5");
 		*/
-		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,7,"hoy apruebo",0);
+		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,7,"hola",0);
 		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,2,"cuarentena",0);
 		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,3,7,"ruta",1);
 		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,1,7,"viajar",0);
-		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,2,"arriba alberto",0);
-		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,9,"macri gato",0);
+		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,2,"quedate en casa",0);
+		pub_altaForzadaArray(listaPublicaciones,PUB_LEN,&idInicialPublicacion,2,9,"coronavirus",0);
 
 		do
 		{
