@@ -63,8 +63,6 @@ int parseAlumnos(char* nombreArchivo,Alumno* arrayDePunterosAlumnos[], int len)
 
 
 
-
-
 int main(void) {
 
 	Alumno* arrayDePunterosAlumnos[100];
