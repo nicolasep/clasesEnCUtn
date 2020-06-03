@@ -44,7 +44,11 @@ int alumno_ordenarPorNombreEId(Alumno* array[],int limite);
 int info_mostrarPromedioAlturas(Alumno* this[],int len, float* pResultado);
 int info_mostraralumnoMasAlto(Alumno* this[],int len, float* pResultado);
 
+int alumnoGuardarEnTxt(Alumno* list[],int len);
+int alumnoGuardarEnBin(Alumno* list[],int len);
 
+int alumnoLeerEnTxt(Alumno* list[],int len);
+int alumnoCargarEnBin(Alumno* list[],int len);
 /**************************************************************/
 
 int alumno_initArray(Alumno* arrayPunteros[],int limite);

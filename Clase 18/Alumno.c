@@ -406,6 +406,135 @@ int info_mostraralumnoMasAlto(Alumno* this[],int len, float* pResultado)
 
 	return retorno;
 }
+int alumnoGuardarEnTxt(Alumno* list[],int len)
+{
+	int retorno = -1;
+	int i;
+	char auxNombre[51];
+	float auxAltura;
+	int auxId;
+	FILE* p;
+	p =fopen("alumnos.txt","w");
+
+	if(list != NULL && len > 0 && p != NULL)
+	{
+		for(i=0; i<len; i++)
+		{
+			if(list[i] != NULL &&
+			  !alumno_getNombre(list[i],auxNombre) &&
+			  !alumno_getAltura(list[i],&auxAltura) &&
+			  !alumno_getId(list[i],&auxId))
+			{
+				//fprintf(fp,"%s,%s,%f\n",nombreAux,idAux,alturaAux);
+
+				fprintf(p,"%d,%s,%.2f\n",auxId,auxNombre,auxAltura);
+				retorno = 0;
+			}
+		}
+	}
+	fclose(p);
+
+
+	return retorno;
+}
+int alumnoGuardarEnBin(Alumno* list[],int len)
+{
+	int retorno = -1;
+	int i;
+	char auxNombre[51];
+	float auxAltura;
+	int auxId;
+	FILE* p;
+	p =fopen("alumnosB.bin","wb");
+
+	if(list != NULL && len > 0 && p != NULL)
+	{
+		for(i=0; i<len; i++)
+		{
+			if(list[i] != NULL &&
+			  !alumno_getNombre(list[i],auxNombre) &&
+			  !alumno_getAltura(list[i],&auxAltura) &&
+			  !alumno_getId(list[i],&auxId))
+			{
+				//fprintf(fp,"%s,%s,%f\n",nombreAux,idAux,alturaAux);
+
+				//fprintf(p,"%d,%s,%.2f\n",auxId,auxNombre,auxAltura);
+				fwrite(list[i],sizeof(Alumno),1,p);
+				retorno = 0;
+			}
+		}
+	}
+	fclose(p);
+
+
+	return retorno;
+}
+int alumnoLeerEnTxt(Alumno* list[],int len)
+{
+	int retorno = -1;
+	int i =0;
+	FILE* p;
+	p =fopen("alumnos.txt","r");
+	char a[100];
+	char b[100];
+	char c[100];
+	Alumno* aux;
+
+	if(list != NULL && len > 0 && p != NULL)
+	{
+		do
+		{
+			if(fscanf(p,"%[^,],%[^,],%[^\n]\n",a,b,c)==3)
+			{
+				aux = alumno_newParametros(b,atof(c),atoi(a));
+				if(p!=NULL)
+				{
+					list[i] = aux;
+					i++;
+					if(i>=len)
+						break; // ya llene todo el array
+				}
+			}
+			else
+				break;
+
+		}
+		while(feof(p)==0);
+		retorno = i;
+	}
+	fclose(p);
+
+	return retorno;
+}
+int alumnoCargarEnBin(Alumno* list[],int len)
+{
+	int retorno = -1;
+	int i=0;
+	Alumno aux;
+	FILE* p;
+	p =fopen("alumnosB.bin","rb");
+
+
+	if(list != NULL && len > 0 && p != NULL)
+	{
+		int fin=0;
+		do{
+			fin = fread(&aux,sizeof(Alumno),1,p);
+			if(fin != 0)
+			{
+				list[i] = alumno_newParametros(aux.nombre,aux.altura,aux.id);
+				i++;
+			}
+		}
+		//while(fin!=0);
+		while(feof(p)==0);
+		retorno = i;
+	}
+	fclose(p);
+
+
+	return retorno;
+}
 
 /**********************************************************************/
 

@@ -102,11 +102,11 @@ int main(void)
 	{
 		printf("Error abriendo archivo\n");
 	}
-*/
+
 
 
 	return 0;
-
+*/
 
 
 
@@ -124,13 +124,13 @@ int main(void)
 	if(!alumno_initArray(arrayPunterosAlumno,QTY_ALUMNOS))
 	{
 		printf("INIT OK\n");
-
+/*
 		alumno_cargaForzada(arrayPunterosAlumno,QTY_ALUMNOS,"Nicolas",172.3,&idAlumnoInicial);
 		alumno_cargaForzada(arrayPunterosAlumno,QTY_ALUMNOS,"Matias",190.1,&idAlumnoInicial);
 		alumno_cargaForzada(arrayPunterosAlumno,QTY_ALUMNOS,"Jose",167.9,&idAlumnoInicial);
 		alumno_cargaForzada(arrayPunterosAlumno,QTY_ALUMNOS,"Alejandro",168.2,&idAlumnoInicial);
 		alumno_cargaForzada(arrayPunterosAlumno,QTY_ALUMNOS,"Mauricio",178.8,&idAlumnoInicial);
-
+*/
 		do
 		{
 			utn_getNumero(&opcion,"1 Alta alumno\n"
@@ -140,7 +140,11 @@ int main(void)
                                   "5 Imprimir\n"
                                   "6 Informe promedio alturas\n"
                                   "7 Informe alumno mas alto\n"
-								  "8 Salir","Opcion incorrecta\n",1,8,2);
+								  "8 Guardar en modo texto\n"
+								  "9 Guardar en modo binario\n"
+								  "10 Cargar datos de un archivo de texto\n"
+								  "11 Cargar datos de un archivo binario\n"
+								  "12 Salir","Opcion incorrecta\n",1,12,2);
 
 			switch(opcion)
 			{
@@ -170,10 +174,22 @@ int main(void)
 			case 7:
 				info_mostraralumnoMasAlto(arrayPunterosAlumno,QTY_ALUMNOS,&maxAltura);
 				break;
+			case 8://Guardar en modo texto
+				alumnoGuardarEnTxt(arrayPunterosAlumno,QTY_ALUMNOS);
+				break;
+			case 9://Guardar en modo binario
+				alumnoGuardarEnBin(arrayPunterosAlumno,QTY_ALUMNOS);
+				break;
+			case 10://Cargar datos de un archivo de texto
+				alumnoLeerEnTxt(arrayPunterosAlumno,QTY_ALUMNOS);
+				break;
+			case 11://Cargar datos de un archivo binario
+				alumnoCargarEnBin(arrayPunterosAlumno,QTY_ALUMNOS);
+				break;
 
 			}
 
-		}while(opcion != 8);
+		}while(opcion != 12);
 
 
 	}

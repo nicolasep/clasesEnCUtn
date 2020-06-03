@@ -1,0 +1,5 @@
+1,Nicolas,172.30
+2,Matias,190.10
+3,Jose,167.90
+4,Alejandro,168.20
+5,Mauricio,178.80
