@@ -36,6 +36,7 @@ int employee_findById(LinkedList* pArrayListEmployee, int id);
 int employee_idMax(LinkedList* pArrayListEmployee);
 int employee_funcionCriterioPorSueldo(void* item1,void* item2);
 int employee_funcionCriterioPorHorasT(void* item1,void* item2);
+int employee_funcionCriterioPorOrdenPorNombre(void* item1,void* item2);
 
 //funcion criterio map
 int employee_funcionCriterioAumentar(void* pElement);
@@ -45,5 +46,9 @@ int employee_funcionCriterioMayoresA20(void* pElement);
 
 //funcion criterio filter
 int employee_funcionCriterioNombreConM(void* pElement);
+
+
+
+LinkedList* employee_crearListaConAumentos(LinkedList* this);
 
 #endif // employee_H_INCLUDED

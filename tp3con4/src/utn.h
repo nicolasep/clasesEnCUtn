@@ -22,5 +22,6 @@ int utn_getDni(char* pResultado, int longitud,char* mensaje, char* mensajeError,
 int utn_getDireccion(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
 int utn_getCuit(char* pResultado,int longitud ,char* mensaje, char* mensajeError, int reintentos);
 int utn_confirmacionAccionChar(char* mensaje);
+int utn_getArchivo(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
 
 #endif /* UTN_H_ */

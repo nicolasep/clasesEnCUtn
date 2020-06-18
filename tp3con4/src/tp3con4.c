@@ -24,10 +24,12 @@ int main()
 	setbuf(stdout,NULL);
 
 	int flagCarga = 0;
-	int flagOrdenado = 0;
     int option;
+    char nombreArchivo[64];
+
     LinkedList* listaEmpleados = ll_newLinkedList();
     LinkedList* listaNombreConM;
+    LinkedList* listaNombresMConAumentos;
 
     do{
     	utn_getNumero(&option,"\nBIENVENIDO, ILIJA UNA OPCION\n"
@@ -41,8 +43,10 @@ int main()
 					          "8. Guardar los datos de los empleados en el archivo data.csv (modo texto)\n"
 					          "9. Guardar los datos de los empleados en el archivo data.csv (modo binario)\n"
     						  "10. Aumentar 20 porciento los sueldos\n"
-    						  "11. Empleados con sueldos mayores o iguales a 20000\n"
-    						  "12. Crear lista de nombres con M\n"
+    						  "11. Empleados con sueldos menores a 20000\n"
+    						  "12. Crear lista de nombres con B\n"
+    						  "13. Crea una nueva lista con los empleados cuyos nombres comiencen con B con sueldo menor a 20, mas aumento\n"
+    						  "14. Limpiar lista principal\n"
 					          "15. Salir\n","OPCION INCORRECTA\n",1,15,2);
 
         switch(option)
@@ -54,7 +58,8 @@ int main()
             	}
             	else
             	{
-            		if(!controller_loadFromText("ordenadosPorSueldo.csv",listaEmpleados))
+            		if(!utn_getArchivo(nombreArchivo,64,"Ingrese el nombre del archivo: ","Error, no es un nombre aceptable\n",2)&&
+            				!controller_loadFromText(nombreArchivo,listaEmpleados))
             		{
                 	flagCarga = 1;
             		}
@@ -84,11 +89,10 @@ int main()
 
             	break;
             case 3:
-
             	controller_addEmployee(listaEmpleados);
             	break;
             case 4:
-            	if(!ll_len(listaEmpleados))
+            	if(ll_isEmpty(listaEmpleados))
 				{
 					printf("Primero debe ingresar al menos un empleado\n");
 				}
@@ -99,7 +103,7 @@ int main()
 
             	break;
             case 5:
-            	if(!ll_len(listaEmpleados))
+            	if(ll_isEmpty(listaEmpleados))
 				{
 					printf("Primero debe ingresar al menos un empleado\n");
 				}
@@ -122,35 +126,31 @@ int main()
 
             	break;
             case 7:
-            	if(!ll_len(listaEmpleados))
+            	if(ll_isEmpty(listaEmpleados))
 				{
 					printf("Primero debe ingresar al menos dos empleado\n");
 				}
 				else
 				{
-					if(!flagOrdenado)
-					{
-						controller_sortEmployee(listaEmpleados);
-					}
-					else
-					{
-						printf("La lista esta ordenada\n");
-					}
+					controller_sortEmployee(listaEmpleados);
 				}
             	break;
             case 8:
-            	if(!ll_len(listaEmpleados))
+            	if(ll_isEmpty(listaEmpleados))
 				{
 					printf("No hay empleados a guardar\n");
 				}
 				else
 				{
-					controller_saveAsText("ordenadosPorSueldo.csv",listaEmpleados);
+					if(!utn_getArchivo(nombreArchivo,64,"Ingrese el nombre del archivo: ","Error, no es un nombre aceptable\n",2))
+					{
+						controller_saveAsText(nombreArchivo,listaEmpleados);
+					}
 				}
 
             	break;
             case 9:
-            	if(!ll_len(listaEmpleados))
+            	if(ll_isEmpty(listaEmpleados))
 				{
 					printf("No hay empleados a guardar\n");
 				}
@@ -161,15 +161,56 @@ int main()
 
             	break;
             case 10:
-            	ll_map(listaEmpleados,employee_funcionCriterioAumentar);
+            	if(!ll_isEmpty(listaEmpleados))
+            	{
+            		if(!ll_map(listaEmpleados,employee_funcionCriterioAumentar) && !utn_confirmacionAccionChar("LISTA MODIFICADA CON EXITO, SI DECEA MOSTRARLA INGRESE S: "))
+					{
+						controller_ListEmployee(listaEmpleados);
+					}
+            	}
+
             	break;
             case 11:
-            	ll_reduce(listaEmpleados,employee_funcionCriterioMayoresA20);
+            	if(!ll_isEmpty(listaEmpleados))
+				{
+            		if(!ll_reduce(listaEmpleados,employee_funcionCriterioMayoresA20) && !utn_confirmacionAccionChar("LISTA REDUCIDA CON EXITO, SI DECEA MOSTRARLA INGRESE S: "))
+					{
+						controller_ListEmployee(listaEmpleados);
+					}
+				}
+
             	break;
             case 12:
-            	listaNombreConM = ll_filter(listaEmpleados,employee_funcionCriterioNombreConM);
-            	controller_ListEmployee(listaNombreConM);
+            	if(!ll_isEmpty(listaEmpleados))
+				{
+					listaNombreConM = ll_filter(listaEmpleados,employee_funcionCriterioNombreConM);
+
+					if(listaNombreConM != NULL && !utn_confirmacionAccionChar("LISTA CREADA CON EXITO, SI DECEA MOSTRARLA INGRESE S: "))
+					{
+						controller_ListEmployee(listaNombreConM);
+					}
+				}
+
 				break;
+            case 13:
+            	if(!ll_isEmpty(listaEmpleados))
+				{
+					listaNombresMConAumentos = employee_crearListaConAumentos(listaEmpleados);
+
+					if(listaNombresMConAumentos != NULL && !utn_confirmacionAccionChar("LISTA CREADA CON EXITO, SI DECEA MOSTRARLA INGRESE S: "))
+					{
+						controller_ListEmployee(listaNombresMConAumentos);
+					}
+				}
+
+				break;
+            case 14:
+            	if(!ll_clear(listaEmpleados))
+            	{
+            		printf("Se elimino todo el contenido de la lista\n");
+            		flagCarga = 0;
+            	}
+            	break;
         }
     }while(option != 15);
 

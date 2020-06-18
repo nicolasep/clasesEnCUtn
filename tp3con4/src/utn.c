@@ -49,6 +49,8 @@ static int esDireccion(char* cadena,int longitud);
 static int esCuit(char* cuit);
 static int getCuit(char* pResultado, int longitud);
 
+static int esArchivo(char* cadena, int len);
+static int getArchivo(char* pResultado, int len);
 
 
 
@@ -598,7 +600,7 @@ static int esDescripcion(char* cadena,int longitud)
  * \param mensaje Es el mensaje a ser mostrado
  * \param mensajeError Es el mensaje de Error a ser mostrado
  * \param reintentos Cantidad de reintentos
- * \return Retorna 0 si se obtuvo una descripcion y -1 si no
+ * \return Retorna 0 si se obtuvo una cadena valida y -1 si no
  *
  */
 int utn_getDescripcion(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
@@ -619,6 +621,7 @@ int utn_getDescripcion(char* pResultado, int longitud,char* mensaje, char* mensa
 	}
 	return retorno;
 }
+
 
 
 /**
@@ -1078,5 +1081,83 @@ int utn_confirmacionAccionChar(char* mensaje)
 
 
 
+	return retorno;
+}
+
+/**
+ * \brief Verifica si la cadena ingresada es un nombre de archivo valida
+ * \param cadena Cadena de caracteres a ser analizada
+ * \param longitud de la cadena
+ * \return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
+ *
+ */
+static int esArchivo(char* cadena, int len)
+{
+    int retorno= 1;
+	int i;
+
+    for(i=0;cadena[i]!='\0' && i<len;i++)
+    {
+      if((cadena[i]<'a' || cadena[i]>'z') && (cadena[i]<'A' || cadena[i]>'Z') &&
+    	  cadena[i] != '.'  && cadena[i] != '-' &&
+		  cadena[i] != '_'  && (cadena[i] < '0' || cadena[i] > '9')  )
+      {
+    	  retorno = 0;
+    	  break;
+      }
+    }
+    return retorno;
+}
+/**
+ * \brief Obtiene un string valido como nombre de archivo
+ * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
+ * \param longitud de la cadena
+ * \return Retorna 0 (EXITO) si se obtiene una cadena valida y -1 (ERROR) si no
+ *
+ */
+static int getArchivo(char* pResultado, int len)
+{
+	int retorno = -1;
+	char buffer[4096];
+
+	if(pResultado != NULL)
+	{
+		if(myGets(buffer,sizeof(buffer))==0 &&  esArchivo(buffer,len))
+	    {
+		retorno = 0;
+		strncpy(pResultado,buffer,len);
+	    }
+	}
+
+
+	return retorno;
+}
+
+/**
+ * \brief Solicita un nombre de archivo al usuario, luego de verificarlo devuelve el resultado
+ * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
+ * \param longitud Es la longitud del array resultado
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param mensajeError Es el mensaje de Error a ser mostrado
+ * \param reintentos Cantidad de reintentos
+ * \return Retorna 0 si se obtuvo un nombre valido y -1 si no
+ *
+ */
+int utn_getArchivo(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
+{
+	char bufferString[4096];
+	int retorno = -1;
+	while(reintentos>=0)
+	{
+		reintentos--;
+		printf("%s",mensaje);
+		if(getArchivo(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
+		{
+			strncpy(pResultado,bufferString,longitud);
+			retorno = 0;
+			break;
+		}
+		printf("%s",mensajeError);
+	}
 	return retorno;
 }

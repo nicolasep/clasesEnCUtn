@@ -529,8 +529,46 @@ int employee_funcionCriterioPorHorasT(void* item1,void* item2)
 	}
 	return retorno;
 }
+/**\brief compara dos elementos del tipo empleado y devuelve si el nombre del elemento 1 es mayor que del elemento 2, en el caso que sean iguales evalua los sueldos
+ * \param puntero al primer elemento a comparar
+ * \param puntero al segundo elemento a comparar
+ * \return devuelve 1 si el elemento 1 es mayor al elemento 2 o -1 si no lo es
+ */
+int employee_funcionCriterioPorOrdenPorNombre(void* item1,void* item2)
+{
+	int retorno = 0;
+	char nombreAux[128];
+	char nombreAux2[128];
+	if(item1 != NULL && item2 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		Employee* aux2 =(Employee*) item2;
+		if(!employee_getNombre(aux1,nombreAux)&&
+		   !employee_getNombre(aux2,nombreAux2))
+		{
+			if(strncmp(nombreAux,nombreAux2,128) > 0)
+			{
+				retorno = 1;
+			}
+			else if(strncmp(nombreAux,nombreAux2,128) == 0)
+			{
+				retorno = employee_funcionCriterioPorSueldo(item1,item2);
+			}
+			else
+			{
+				retorno = -1;
+			}
+		}
 
+	}
+	return retorno;
+}
 //funcion criterio map
+
+/**\brief aumenta un 20% los sueldos de los empleados
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si pudo concretar el aumento o -1 si el puntero al elemento es NULL
+ */
 int employee_funcionCriterioAumentar(void* pElement)
 {
 	int retorno = -1;
@@ -554,13 +592,18 @@ int employee_funcionCriterioAumentar(void* pElement)
 }
 
 //funcion criterio reduce
+
+/**\brief evalua si el empleado tiene un sueldo menor a 20000 y devuelve el resultado
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si el sueldo es menor, 0 si el sueldo no lo es y -1 si el puntero al elemento es NULL
+ */
 int employee_funcionCriterioMayoresA20(void* pElement)
 {
 	int retorno = -1;
 	int sueldo;
 
-
-
+	if(pElement != NULL)
+	{
 		Employee* auxEmployee =(Employee*) pElement;
 		if(!employee_getSueldo(auxEmployee,&sueldo))
 		{
@@ -574,10 +617,17 @@ int employee_funcionCriterioMayoresA20(void* pElement)
 			}
 		}
 
-
+	}
 	return retorno;
 }
+
+
 //funcion criterio filter
+
+/**\brief verifica si el nombre del empledo empieza con la letra b y devuelve el resultado
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si el nombre empieza con esa letra, 0 si no y -1 si el puntero al elemento es NULL
+ */
 int employee_funcionCriterioNombreConM(void* pElement)
 {
 	int retorno = -1;
@@ -602,3 +652,27 @@ int employee_funcionCriterioNombreConM(void* pElement)
 
 	return retorno;
 }
+LinkedList* employee_crearListaConAumentos(LinkedList* this)
+{
+	LinkedList* auxList = NULL;
+	if(this != NULL)
+	{
+		auxList = ll_filter(this,employee_funcionCriterioMayoresA20);
+		if(auxList != NULL)
+		{
+			if(!ll_map(auxList,employee_funcionCriterioAumentar))
+			{
+				if(!ll_reduce(auxList,employee_funcionCriterioNombreConM))
+				{
+					printf("ok\n");
+				}
+			}
+		}
+
+	}
+
+	return auxList;
+}
+
+
+

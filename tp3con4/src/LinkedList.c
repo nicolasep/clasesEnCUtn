@@ -607,6 +607,13 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 }
 /*agarra cada elemento de linkedlist y se lo pasa como parametro a la funcion
  * por ejemplo incrementar el salario de los empleados de lista*/
+
+/** \brief realiza una accion sobre cada elemento de la lista que decide la funcion criterio
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                ( 0) Si ok
+ */
 int ll_map(LinkedList* this, int (*pFunc)(void*))
 {
 	int retorno = -1;
@@ -622,6 +629,7 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 			{
 				retorno = 0;
 			}
+
 			indice++;
 		}while(indice < ll_len(this));
 	}
@@ -631,6 +639,13 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 
 /*dice si se elimina o no ese elemento de la lista, el que se paso a la funcion criterio
  * se llama por cada elemento de la lista, devuelve la lista sin los elementos. hay que recorrerla desde el final*/
+
+/** \brief elimina de la lista elementos elejidos por la funcion criterio
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                ( 0) Si ok
+ */
 int ll_reduce(LinkedList* this, int (*pFunc)(void*))
 {
 	int retorno = -1;
@@ -642,7 +657,7 @@ int ll_reduce(LinkedList* this, int (*pFunc)(void*))
 		do
 		{
 			pElement = ll_get(this,indice);
-			if(pFunc(pElement))
+			if(!pFunc(pElement))
 			{
 				ll_remove(this,indice);
 			}
@@ -653,6 +668,14 @@ int ll_reduce(LinkedList* this, int (*pFunc)(void*))
 	return retorno;
 }
 /*devuelve una nueva lista con elementos que decide la funcion criterio*/
+
+/** \brief crea una nueva lista y la devuelve con elementos elejidos por la funcion criterio
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                (puntero a la nueva lista) Si ok
+ */
+
 LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*))
 {
   LinkedList* auxLista = NULL;

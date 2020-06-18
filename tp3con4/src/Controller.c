@@ -262,20 +262,35 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
 	int retorno = -1;
 	int criterioOrden;
-
+	int tipoOrden;
 	if(pArrayListEmployee != NULL)
 	{
-		if(!utn_getNumero(&criterioOrden,"\n----ORDENAR LISTA----\n"
-				                         "\nElija el criterio de orden\n"
+		if(!utn_getNumero(&tipoOrden,"ORDENAR POR:\n"
+									 "1 - POR NOMBRE Y SUELDO\n"
+									 "2 - POR SUELDO Y HORAS TRABAJADAS\n","ERROR, OPCION INCORRECTA\n",1,2,2)&&
+		   !utn_getNumero(&criterioOrden,"\nElija el criterio de orden\n"
 										   "1 - Descendente\n"
 				                           "2 - Ascendente\n","Opcion incorrecta\n",1,2,2))
 		{
 			printf("\nAguarde un memonto mientras se ordena la lista.......\n");
-			if(!ll_sort(pArrayListEmployee,employee_funcionCriterioPorSueldo,criterioOrden-1))
+			switch(tipoOrden)
 			{
-				printf("\nLista ordenada con exito\n");
-				retorno = 0;
+			case 1:
+				if(!ll_sort(pArrayListEmployee,employee_funcionCriterioPorOrdenPorNombre,criterioOrden-1))
+				{
+					printf("\nLista ordenada con exito\n");
+					retorno = 0;
+				}
+				break;
+			case 2:
+				if(!ll_sort(pArrayListEmployee,employee_funcionCriterioPorSueldo,criterioOrden-1))
+				{
+					printf("\nLista ordenada con exito\n");
+					retorno = 0;
+				}
+				break;
 			}
+
 		}
 	}
 
