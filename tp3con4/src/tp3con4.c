@@ -168,6 +168,10 @@ int main()
 						controller_ListEmployee(listaEmpleados);
 					}
             	}
+            	else
+            	{
+            		printf("Primero debe ingresar empleados\n");
+            	}
 
             	break;
             case 11:
@@ -177,6 +181,10 @@ int main()
 					{
 						controller_ListEmployee(listaEmpleados);
 					}
+				}
+            	else
+				{
+					printf("Primero debe ingresar empleados\n");
 				}
 
             	break;
@@ -190,6 +198,10 @@ int main()
 						controller_ListEmployee(listaNombreConM);
 					}
 				}
+            	else
+				{
+					printf("Primero debe ingresar empleados\n");
+				}
 
 				break;
             case 13:
@@ -202,10 +214,18 @@ int main()
 						controller_ListEmployee(listaNombresMConAumentos);
 					}
 				}
+            	else
+				{
+					printf("Primero debe ingresar empleados\n");
+				}
 
 				break;
             case 14:
-            	if(!ll_clear(listaEmpleados))
+            	if(ll_isEmpty(listaEmpleados))
+            	{
+            		printf("La lista esta vacia\n");
+            	}
+            	else if(!ll_clear(listaEmpleados))
             	{
             		printf("Se elimino todo el contenido de la lista\n");
             		flagCarga = 0;

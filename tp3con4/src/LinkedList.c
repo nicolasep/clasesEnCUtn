@@ -703,4 +703,41 @@ LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*))
 
   return auxLista;
 }
+/*cantidadDeEmpleadosQueTrabajnMasDe8 = funcion ll_count(listaEmpleados,empleadosTrabajanMasDe8Horas);
+ *
+ * funcion ll_count()
+ * devuelve lo que va contando, se puede usar para sacar un maximo o para saber por ejemplo cuantos empleados trabajan mas de 8 horas
+ *
+ * hacer reduce para sacar maximo
+ * LinkedList* ll_mayor(LinkedList* this, int (*funArgumento)(void*)
+ * {
+ * int i;
+ * void* element = NULL;
+ *
+ *   if(this != NULL && funArgumento != NULL)
+ *   {
+ *   	for(i=0; i<ll_len(this);i++)
+ *   	{
+ *   		element = ll_get(this,i);
+ *
+ *   		valor = funArgument(element);
+ *   		if(valor>mayor)
+ *   		{
+ *   			mayor = valor;
+ *   		}
+ *   	}
+ *   }
+ *
+ * }
+ * */
 
+/*
+int nose()
+{
+
+	if(valor>mayor)
+	{
+		mayor = valor;
+	}
+}
+*/
