@@ -673,6 +673,174 @@ LinkedList* employee_crearListaConAumentos(LinkedList* this)
 
 	return auxList;
 }
+/**\brief busca el sueldo maximo entre los elementos y lo compara con el numero max
+ * \param puntero al elemento a comparar
+ * \param puntero al elemento a comparar
+ * \param variable a comparar como maximo
+ * \return devuelve el numero maximo y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioMax(void* item1,void* item2,int max)
+{
+	int retorno = 0;
+	int sueldo1;
+	int sueldo2;
+	if(item1 != NULL && item2 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		Employee* aux2 =(Employee*) item2;
+		if(!employee_getSueldo(aux1,&sueldo1)&&
+		   !employee_getSueldo(aux2,&sueldo2))
+		{
+			if(max == -1)
+			{
+				max = sueldo1;
+			}
+			if(sueldo1 > sueldo2 && sueldo1 > max)
+			{
+				retorno = sueldo1;
+			}
+			else if(sueldo1 < sueldo2 && sueldo2 > max)
+			{
+				retorno = sueldo2;
+			}
+			else
+			{
+				retorno = max;
+			}
+		}
 
+	}
+	return retorno;
 
+}
 
+/**\brief busca el sueldo minimo entre los elementos y lo compara con el numero max
+ * \param puntero al elemento a comparar
+ * \param puntero al elemento a comparar
+ * \param variable a comparar como maximo
+ * \return devuelve el numero minimo y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioMin(void* item1,void* item2,int min)
+{
+	int retorno = 0;
+	int sueldo1;
+	int sueldo2;
+	if(item1 != NULL && item2 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		Employee* aux2 =(Employee*) item2;
+		if(!employee_getSueldo(aux1,&sueldo1)&&
+		   !employee_getSueldo(aux2,&sueldo2))
+		{
+			if(min == -1)
+			{
+				min = sueldo1;
+			}
+			if(sueldo1 < sueldo2 && sueldo1 < min)
+			{
+				retorno = sueldo1;
+			}
+			else if(sueldo1 < sueldo2 && sueldo2 < min)
+			{
+				retorno = sueldo2;
+			}
+			else
+			{
+				retorno = min;
+			}
+		}
+
+	}
+	return retorno;
+
+}
+
+/**\brief cuenta los empleados con sueldos mayores a 30000
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si el sueldo es mayor y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioSueldosMayores30(void* item1)
+{
+	int retorno = -1;
+	int sueldo;
+	if(item1 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		if(!employee_getSueldo(aux1,&sueldo))
+		{
+			if(sueldo > 30000)
+			{
+				retorno = 1;
+			}
+		}
+
+	}
+	return retorno;
+
+}
+/**\brief busca el sueldo minimo y devuelve el resultado
+ * \param puntero al elemento a comparar
+ * \param puntero al elemento a comparar
+ * \return devuelve el 1 si el item1 es menor que el item2 y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioMinPelement(void* item1,void* item2)
+{
+	int retorno = -1;
+	int sueldo1;
+	int sueldo2;
+	if(item1 != NULL && item2 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		Employee* aux2 =(Employee*) item2;
+		if(!employee_getSueldo(aux1,&sueldo1)&&
+		   !employee_getSueldo(aux2,&sueldo2))
+		{
+
+			if(sueldo1 < sueldo2)
+			{
+				retorno = 1;
+			}
+			else if(sueldo2 < sueldo1)
+			{
+				retorno = 0;
+			}
+
+		}
+
+	}
+	return retorno;
+
+}
+/**\brief busca el sueldo maximo y devuelve el resultado
+ * \param puntero al elemento a comparar
+ * \param puntero al elemento a comparar
+ * \return devuelve el 1 si el item1 es mayor que el item2 y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioMaxPelement(void* item1,void* item2)
+{
+	int retorno = -1;
+	int sueldo1;
+	int sueldo2;
+	if(item1 != NULL && item2 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		Employee* aux2 =(Employee*) item2;
+		if(!employee_getSueldo(aux1,&sueldo1)&&
+		   !employee_getSueldo(aux2,&sueldo2))
+		{
+
+			if(sueldo1 > sueldo2)
+			{
+				retorno = 1;
+			}
+			else if(sueldo2 < sueldo1)
+			{
+				retorno = 0;
+			}
+
+		}
+
+	}
+	return retorno;
+
+}

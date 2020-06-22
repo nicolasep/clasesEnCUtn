@@ -34,22 +34,22 @@ struct LinkedList
 
 
 //Publicas
-LinkedList* ll_newLinkedList(void);
-int ll_len(LinkedList* this);                                       //devuelve el valor del campo int size
+LinkedList* ll_newLinkedList(void); //usado
+int ll_len(LinkedList* this);             //usado
 Node* test_getNode(LinkedList* this, int nodeIndex);
-int test_addNode(LinkedList* this, int nodeIndex,void* pElement);
-int ll_add(LinkedList* this, void* pElement);
-void* ll_get(LinkedList* this, int index);
-int ll_set(LinkedList* this, int index,void* pElement);
-int ll_remove(LinkedList* this,int index);
-int ll_clear(LinkedList* this);
-int ll_deleteLinkedList(LinkedList* this);
-int ll_indexOf(LinkedList* this, void* pElement);
-int ll_isEmpty(LinkedList* this);
+int test_addNode(LinkedList* this, int nodeIndex,void* pElement); //
+int ll_add(LinkedList* this, void* pElement); //usado
+void* ll_get(LinkedList* this, int index); //usado
+int ll_set(LinkedList* this, int index,void* pElement); //usado
+int ll_remove(LinkedList* this,int index); //usado
+int ll_clear(LinkedList* this); //usado
+int ll_deleteLinkedList(LinkedList* this); //usado
+int ll_indexOf(LinkedList* this, void* pElement); //
+int ll_isEmpty(LinkedList* this); //usado
 int ll_push(LinkedList* this, int index, void* pElement);
-void* ll_pop(LinkedList* this,int index);                           //elimina un elemento (los enlaces a ese elemento) y devuelve un puntero a ese elemento
+void* ll_pop(LinkedList* this,int index);  //usado
 int ll_contains(LinkedList* this, void* pElement);
-int ll_containsAll(LinkedList* this,LinkedList* this2);
+int ll_containsAll(LinkedList* this,LinkedList* this2); //usado
 LinkedList* ll_subList(LinkedList* this,int from,int to);
 LinkedList* ll_clone(LinkedList* this);
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
@@ -57,3 +57,8 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 int ll_map(LinkedList* this, int (*pFunc)(void*));
 int ll_reduce(LinkedList* this, int (*pFunc)(void*));
 LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*));
+
+//probar
+int ll_countMaxMin(LinkedList* this, int (*pFunc)(void* ,void*,int),int tipo);
+int ll_count(LinkedList* this, int (*pFunc)(void*));
+LinkedList* ll_countPelement(LinkedList* this, int (*pFunc)(void*, void*));

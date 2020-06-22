@@ -320,8 +320,14 @@ int ll_deleteLinkedList(LinkedList* this)
     int returnAux = -1;
     if(this != NULL)
     {
-    	free(this);
-    	returnAux = 0;
+    	if(!ll_clear(this))
+    	{
+    		free(this);
+    		this->pFirstNode = NULL;
+    		this->size = 0;
+    		returnAux = 0;
+    	}
+
     }
 
     return returnAux;
@@ -481,18 +487,20 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
     int indice = 0;
     if(this != NULL && this2 != NULL)
     {
-		do
+    	do
 		{
 			returnAux = 1;
 			aux = ll_get(this2,indice);
-			if(ll_indexOf(this,aux)==-1)
-			{
-				returnAux = 0;
-				break;
-			}
-			indice++;
 
-		}while(indice < ll_len(this));
+				if(!ll_contains(this,aux))
+				{
+					returnAux = 0;
+					break;
+				}
+				indice++;
+
+
+		}while(indice < ll_len(this2));
     }
 
     return returnAux;
@@ -702,6 +710,142 @@ LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*))
   }
 
   return auxLista;
+}
+//LinkedList* ll_countMaxMin(this,int)
+
+/** \brief Buscar el maximo o minimo segun ordene la funcion criterio y devuelve el indice
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \param order int [1] Indica buscar minimo - [0] Indica buscar maximo
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                (maximo o minimo) Si ok
+ */
+int ll_countMaxMin(LinkedList* this, int (*pFunc)(void* ,void*,int),int tipo)
+{
+    int returnAux =-1;
+    void* aux = NULL;
+    void* aux2 = NULL;
+
+    int auxInt;
+    int limite = ll_len(this)-1;
+    int flagSwap;
+    int i;
+    if(this != NULL && pFunc != NULL)
+    {
+		do
+		{
+			flagSwap = 0;
+			for(i=0;i<limite;i++)
+			{
+			 aux = ll_get(this,i);
+			 aux2 = ll_get(this,i+1);
+			 if(i==0)
+			 {
+				 auxInt = -1;
+			 }
+			 auxInt = pFunc(aux,aux2,auxInt);
+			 	 if(tipo == 0)
+			 	 {
+			 		 if(i==0)
+			 		 {
+			 			returnAux = auxInt;
+			 		 }
+			 		 else if(auxInt > returnAux)
+			 		 {
+			 			returnAux = auxInt;
+			 		 }
+
+			 	 }
+			 	 else if(tipo == 1)
+			 	 {
+			 		 if(i==0)
+					 {
+			 			returnAux = auxInt;
+					 }
+					 else if(auxInt < returnAux)
+					 {
+						returnAux = auxInt;
+					 }
+			 	 }
+
+			}
+			limite--;
+		}while(flagSwap);
+    }
+
+    return returnAux;
+
+}
+/** \brief cuenta la cantidad de elementos que cumplen con la funcion criterio y lo devuelve
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                (la suma total) Si ok
+ */
+int ll_count(LinkedList* this, int (*pFunc)(void*))
+{
+    int returnAux =-1;
+    void* aux = NULL;
+    int i=0;
+    if(this != NULL && pFunc != NULL)
+    {
+		do
+		{
+
+			 aux = ll_get(this,i);
+			 if(i==0)
+			 {
+				 returnAux = 0;
+			 }
+
+			 if(pFunc(aux)==1)
+			 {
+				returnAux++;
+			 }
+
+			 i++;
+
+		}while(i < ll_len(this));
+    }
+
+    return returnAux;
+
+}
+/** \brief cuenta la cantidad de elementos que cumplen con la funcion criterio y lo devuelve
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                (el elemento) Si ok
+ */
+LinkedList* ll_countPelement(LinkedList* this, int (*pFunc)(void*, void*))
+{
+
+    void* aux = NULL;
+    void* returnAux = NULL;
+
+    int i=0;
+    if(this != NULL && pFunc != NULL)
+    {
+		do
+		{
+
+			 aux = ll_get(this,i);
+			 if(i==0)
+			 {
+				 returnAux = aux;
+			 }
+			 else if(pFunc(aux,returnAux) == 1)
+			 {
+				 returnAux = aux;
+			 }
+
+			 i++;
+
+		}while(i < ll_len(this));
+    }
+
+    return returnAux;
+
 }
 /*cantidadDeEmpleadosQueTrabajnMasDe8 = funcion ll_count(listaEmpleados,empleadosTrabajanMasDe8Horas);
  *

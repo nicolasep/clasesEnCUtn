@@ -47,8 +47,15 @@ int employee_funcionCriterioMayoresA20(void* pElement);
 //funcion criterio filter
 int employee_funcionCriterioNombreConM(void* pElement);
 
-
-
+//funcion criterio con map, reduce y filter
 LinkedList* employee_crearListaConAumentos(LinkedList* this);
+
+//probar
+int employee_funcionCriterioMax(void* item1,void* item2,int max);
+int employee_funcionCriterioMin(void* item1,void* item2,int min);
+int employee_funcionCriterioSueldosMayores30(void* item1);
+
+int employee_funcionCriterioMinPelement(void* item1,void* item2);
+int employee_funcionCriterioMaxPelement(void* item1,void* item2);
 
 #endif // employee_H_INCLUDED
