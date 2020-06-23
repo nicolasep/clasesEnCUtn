@@ -585,6 +585,10 @@ int employee_funcionCriterioAumentar(void* pElement)
 			{
 				retorno = 1;
 			}
+			else
+			{
+				retorno = 0;
+			}
 		}
 
 	}
@@ -771,6 +775,10 @@ int employee_funcionCriterioSueldosMayores30(void* item1)
 			if(sueldo > 30000)
 			{
 				retorno = 1;
+			}
+			else
+			{
+				retorno = 0;
 			}
 		}
 
