@@ -33,6 +33,7 @@ int main()
     int maxMin;
     int contadorSueldoMas30;
     int opcionMaxMin;
+    long sueldosTotal;
 
     LinkedList* listaEmpleados = ll_newLinkedList();
     LinkedList* listaEmpleados2;
@@ -64,7 +65,10 @@ int main()
     						  "18. Calcula el maximo o minimo de los sueldos de una lista\n"
     						  "19. Cuenta los sueldos que superan los 30000 de una lista\n"
     						  "20. Imprime el empleado con sueldo maximo y minimo\n"
-							  "21. Salir\n","OPCION INCORRECTA\n",1,21,2);
+    						  "21. Ajustar sueldos segun horas trabajadas\n"
+    						  "22. Obtener lista de empleados que trabajan mas de 90 horas\n"
+    						  "23. Total de sueldos a pagar\n"
+							  "24. Salir\n","OPCION INCORRECTA\n",1,24,2);
 
         switch(option)
         {
@@ -181,13 +185,47 @@ int main()
             	break;
 
             case 7://ORDENAR EMPLEADOS DE LISTA 1
-            	if(ll_isEmpty(listaEmpleados))
+            	if(!utn_getNumero(&opcionMostrar,"Elija a ordenar:\n"
+            													"1 - Lista de empleados 1 (Lista principal)\n"
+            													"2 - Lista de empleados 2\n"
+            													"3 - Lista de empleados 3\n","Error, opcion incorrecta\n",1,3,2))
 				{
-					printf("Primero debe ingresar al menos dos empleado\n");
-				}
-				else
-				{
-					controller_sortEmployee(listaEmpleados);
+
+					switch(opcionMostrar)
+					{
+					case 1:
+						if(ll_isEmpty(listaEmpleados) && ll_len(listaEmpleados)<=0)
+						{
+							printf("Primero debe ingresar al menos un empleado\n");
+						}
+						else
+						{
+							controller_sortEmployee(listaEmpleados);
+						}
+						break;
+					case 2:
+						if(ll_isEmpty(listaEmpleados2))
+						{
+							printf("Primero debe ingresar al menos un empleado\n");
+						}
+						else
+						{
+							controller_sortEmployee(listaEmpleados2);
+						}
+						break;
+					case 3:
+						if(ll_isEmpty(listaEmpleados3))
+						{
+							printf("Primero debe ingresar al menos un empleado\n");
+						}
+						else
+						{
+							controller_sortEmployee(listaEmpleados3);
+						}
+						break;
+
+					}
+					opcionMostrar = 0;
 				}
             	break;
 
@@ -596,11 +634,51 @@ int main()
 					employee_printEmployee(auxEmployee2);
 				}
 				break;
+
+            case 21://punto 1
+            	if(ll_isEmpty(listaEmpleados))
+				{
+					printf("Primero debe ingresar al menos un empleado\n");
+				}
+				else
+				{
+					if(!ll_map(listaEmpleados,employee_funcionCriterioAumentarSueldoSegunHoras))
+					{
+						printf("Operacion realizada con exito\n");
+					}
+				}
+            	break;
+
+            case 22://punto 2
+            	if(ll_isEmpty(listaEmpleados))
+				{
+					printf("Primero debe ingresar al menos un empleado\n");
+				}
+				else
+				{
+					if((listaEmpleados3 = ll_filter(listaEmpleados,employee_funcionCriterioEmpleadosQueTrabajanMas90Hs))!=NULL)
+					{
+						printf("Operacion realizada con exito\n");
+					}
+				}
+            	break;
+
+            case 23://punto 3
+            	if(ll_isEmpty(listaEmpleados))
+				{
+					printf("Primero debe ingresar al menos un empleado\n");
+				}
+				else
+				{
+					sueldosTotal = 0;
+					sueldosTotal = ll_countSuma(listaEmpleados,employee_funcionCriterioTolalSueldosAPagar);
+					printf("El total de sueldos a pagar es: %li\n",sueldosTotal);
+				}
+            	break;
         }
 
 
-
-    }while(option != 21);
+    }while(option != 24);
 
 
     return 0;

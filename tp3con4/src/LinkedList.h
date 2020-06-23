@@ -62,3 +62,4 @@ LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*));
 int ll_countMaxMin(LinkedList* this, int (*pFunc)(void* ,void*,int),int tipo);
 int ll_count(LinkedList* this, int (*pFunc)(void*));
 LinkedList* ll_countPelement(LinkedList* this, int (*pFunc)(void*, void*));
+long ll_countSuma(LinkedList* this, int (*pFunc)(void*));

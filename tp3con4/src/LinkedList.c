@@ -847,41 +847,35 @@ LinkedList* ll_countPelement(LinkedList* this, int (*pFunc)(void*, void*))
     return returnAux;
 
 }
-/*cantidadDeEmpleadosQueTrabajnMasDe8 = funcion ll_count(listaEmpleados,empleadosTrabajanMasDe8Horas);
- *
- * funcion ll_count()
- * devuelve lo que va contando, se puede usar para sacar un maximo o para saber por ejemplo cuantos empleados trabajan mas de 8 horas
- *
- * hacer reduce para sacar maximo
- * LinkedList* ll_mayor(LinkedList* this, int (*funArgumento)(void*)
- * {
- * int i;
- * void* element = NULL;
- *
- *   if(this != NULL && funArgumento != NULL)
- *   {
- *   	for(i=0; i<ll_len(this);i++)
- *   	{
- *   		element = ll_get(this,i);
- *
- *   		valor = funArgument(element);
- *   		if(valor>mayor)
- *   		{
- *   			mayor = valor;
- *   		}
- *   	}
- *   }
- *
- * }
- * */
 
-/*
-int nose()
+///PUNTO 3
+/** \brief cuenta la cantidad de elementos que cumplen con la funcion criterio y lo devuelve
+ * \param pList LinkedList* Puntero a la lista
+ * \param pFunc (*pFunc) Puntero a la funcion criterio
+ * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
+                                (la suma total) Si ok
+ */
+long ll_countSuma(LinkedList* this, int (*pFunc)(void*))
 {
+    long returnAux =-1;
+    void* aux = NULL;
+    int i=0;
+    if(this != NULL && pFunc != NULL)
+    {
+    	returnAux = 0;
+		do
+		{
+			 aux = ll_get(this,i);
+			 if(aux != NULL)
+			 {
+				 returnAux += pFunc(aux);
+			 }
 
-	if(valor>mayor)
-	{
-		mayor = valor;
-	}
+			 i++;
+
+		}while(i < ll_len(this));
+    }
+
+    return returnAux;
+
 }
-*/

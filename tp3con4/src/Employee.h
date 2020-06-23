@@ -58,4 +58,8 @@ int employee_funcionCriterioSueldosMayores30(void* item1);
 int employee_funcionCriterioMinPelement(void* item1,void* item2);
 int employee_funcionCriterioMaxPelement(void* item1,void* item2);
 
+int employee_funcionCriterioAumentarSueldoSegunHoras(void* item1);
+int employee_funcionCriterioEmpleadosQueTrabajanMas90Hs(void* item1);
+int employee_funcionCriterioTolalSueldosAPagar(void* item1);
+
 #endif // employee_H_INCLUDED

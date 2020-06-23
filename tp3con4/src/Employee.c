@@ -844,3 +844,94 @@ int employee_funcionCriterioMaxPelement(void* item1,void* item2)
 	return retorno;
 
 }
+
+
+//////PUNTO 1
+/**\brief aumenta el sueldo de los empleados segun horas trabajadas
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si pudo modificar el sueldo y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioAumentarSueldoSegunHoras(void* item1)
+{
+	int retorno = -1;
+	int sueldo;
+	int horasT;
+	if(item1 != NULL)
+	{
+
+		retorno = 0;
+		Employee* aux1 =(Employee*) item1;
+		if(!employee_getHorasTrabajadas(aux1,&horasT))
+		{
+
+			if(horasT >= 100)
+			{
+				sueldo = (horasT *50)*20;
+				employee_setSueldo(aux1,sueldo);
+				retorno = 1;
+			}
+			else if(horasT < 100)
+			{
+				sueldo = (horasT *30)*20;
+				employee_setSueldo(aux1,sueldo);
+				retorno = 1;
+			}
+
+		}
+
+	}
+	return retorno;
+
+}
+////PUNTO 2
+
+/**\brief cuenta los empleados con sueldos mayores a 30000
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si el sueldo es mayor y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioEmpleadosQueTrabajanMas90Hs(void* item1)
+{
+	int retorno = -1;
+	int horasT;
+	if(item1 != NULL)
+	{
+		Employee* aux1 =(Employee*) item1;
+		if(!employee_getHorasTrabajadas(aux1,&horasT))
+		{
+			if(horasT > 90)
+			{
+				retorno = 1;
+			}
+			else
+			{
+				retorno = 0;
+			}
+		}
+
+	}
+	return retorno;
+
+}
+
+////PUNTO 3
+/**\brief cuenta los empleados con sueldos mayores a 30000
+ * \param puntero al elemento a comparar
+ * \return devuelve 1 si el sueldo es mayor y -1 si el puntero al elemento es NULL
+ */
+int employee_funcionCriterioTolalSueldosAPagar(void* item1)
+{
+	int retorno = -1;
+	int sueldo;
+	if(item1 != NULL)
+	{
+		retorno = 0;
+		Employee* aux1 =(Employee*) item1;
+		if(!employee_getSueldo(aux1,&sueldo))
+		{
+			retorno = sueldo;
+		}
+
+	}
+	return retorno;
+
+}
